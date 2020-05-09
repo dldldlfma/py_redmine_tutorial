@@ -78,6 +78,7 @@ print(list(redmine.project.all()))
 print(len(redmine.prject.all()))
 ```
 
+---
 
 ### Introspection
 
@@ -136,6 +137,8 @@ dir, list, repr 등을 사용하면 되는데
 
 ## Redmine Project 불러오기
 
+---
+
 Python-Redmine library를 이용해서 Redmine에 있는 project list를 불러온다.
 
 ```python
@@ -152,28 +155,33 @@ print(len(redmine.project.all())) #number of project
 
 ## Redmine Project 생성하기
 
+---
+
 이번에는 프로젝트를 생성해보겠습니다.  
 
 실제로 Redmine에서 project 생성하는 화면은 아래와 같습니다.
 
-![make_prj](./image/make_prj.png)
+![make_prj](./image/make_prj.png)  
 
+---
+  
+  
 Python에서 project를 생성하는 경우에도 위 사진에 있는 내용들이 전달되어야 합니다.
 
 따라서 전달해야 하는 목록은 아래와 같습니다. 
 
-Parameters:	  
-&nbsp; **name** (string) – (required). Project 이름.  
-&nbsp; **identifier** (string) – (required). Project 식별자.  
-&nbsp; **description** (string) – (optional). Project 설명.  
-&nbsp; **homepage** (string) – (optional). Project homepage url.  
-&nbsp; **is_public** (bool) – (optional). 공개여부 *True*면 공개.  
-&nbsp; **parent_id** (int) – (optional). 부모 project의 id.
-&nbsp; **inherit_members** (bool) – (optional). 부모 project의 멤버 포함 여부 *True*면 포함.  
-&nbsp; **tracker_ids** (list) – (optional). The ids of trackers for this project.  
-&nbsp; **issue_custom_field_ids** (list) – (optional). The ids of issue custom fields for this project.  
-&nbsp; **custom_fields (list)** – (optional). Custom fields as [{‘id’: 1, ‘value’: ‘foo’}].  
-&nbsp; **enabled_module_names** (list) – (optional). 이 Project에서 사용할 module의 이름을 넣으면 됩니다. (Redmine >= 2.6.0 only).  
+### Parameters:	  
+- **name** (string) – (required). Project 이름.  
+- **identifier** (string) – (required). Project 식별자.  
+- **description** (string) – (optional). Project 설명.  
+- **homepage** (string) – (optional). Project homepage url.  
+- **is_public** (bool) – (optional). 공개여부 *True*면 공개.  
+- **parent_id** (int) – (optional). 부모 project의 id.
+- **inherit_members** (bool) – (optional). 부모 project의 멤버 포함 여부 *True*면 포함.  
+- **tracker_ids** (list) – (optional). The ids of trackers for this project.  
+- **issue_custom_field_ids** (list) – (optional). The ids of issue custom fields for this project.  
+- **custom_fields (list)** – (optional). Custom fields as [{‘id’: 1, ‘value’: ‘foo’}].  
+- **enabled_module_names** (list) – (optional). 이 Project에서 사용할 module의 이름을 넣으면 됩니다. (Redmine >= 2.6.0 only).  
 
 ```python
 >>> project = redmine.project.create(
@@ -204,7 +212,12 @@ project = redmine.project.create(
 )
 ```
 ![create_rm_prj_using_py](./image/py_create_prj.png)
+
+---
+
 ![list_of_prj](./image/list_of_prj.png)
+
+---
 
 ## Redmine Project 편집하기
 
