@@ -1,5 +1,5 @@
 # Python-Redmine 연동하기
-
+![py_redmine](./image/py_redmine.png)
 ## 목차
 
 - [Library 설치(python-redmine)](#Library-설치(python-redmine))
