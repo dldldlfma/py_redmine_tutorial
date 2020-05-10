@@ -8,8 +8,8 @@
 - Redmine Project 불러오기
 - Redmine Project 생성하기
 - Redmine Project 편집하기
-- Redmine 특정 Project Issue 생성하기
 - Redmine 특정 Project Issue 불러오기
+- Redmine 특정 Project Issue 생성하기
 - Redmine 특정 Project Issue 편집하기
 - Redmine 특정 Project Gantt-chart 불러오기
 
@@ -152,6 +152,33 @@ print(list(redmine.project.all())) # list of project
 print(len(redmine.project.all())) #number of project
 ```
 
+전체 프로젝트 내역을 atom, json, xml 형식으로 저장 할 수도 있는데 방식은 아래와 같습니다.
+
+```python
+#현위치에 projects.atom 이라는 이름으로 project 정보를 저장
+projects = redmine.project.all()
+projects.export('atom',savepath='./',filename='projects.atom')
+
+```
+
+```python
+#현위치에 projects.json 이라는 이름으로 project 정보를 저장
+projects = redmine.project.all()
+projects.export('json',savepath='./',filename='projects.json')
+```
+
+
+```python
+#현위치에 projects.xml 이라는 이름으로 project 정보를 저장
+projects = redmine.project.all()
+projects.export('xml',savepath='./',filename='projects.xml')
+```
+
+개인적으로는 atom 보다는 json이나 xml을 사용하시는 것이 좋을 것 같은데 그 중에서도 json이 더 좋을 것 같습니다.  
+
+보기도 편하고 나중에 python에서 dictionary로 읽어오거나 전달하기 편하기 때문입니다.
+
+
 
 ## Redmine Project 생성하기
 
@@ -235,16 +262,35 @@ prj.save() # save를 꼭 해야합니다.
 
 수정한 후에 꼭 save까지 해주셔야 합니다.
 
-## Redmine 특정 Project Issue 생성하기
+
+## Redmine 특정 Project Issue 불러오기
 
 이하 내용은 [issue](https://python-redmine.com/resources/issue.html)에 있는 내용을 번역 및 참고하여 작성되었습니다.
 
+
+특정 프로젝트가 가지고 있는 issue를 불러오는 방법은 간단합니다.
+
+```python
+prj = redmine.project.get(resource_id="your_project_id")
+my_prj_issue_list = list(prj.issues)
+```
+
+위와 같이 수행하면 ```my_prj_issue_list```에 내가 선택한 프로젝트의 issues list가 담깁니다.
+
+
+
+## Redmine 특정 Project Issue 생성하기
+
+
 Redmine에서 project의 issue를 생성하는 방법도 크게 다르지 않습니다.  
-대신 채워야 하는 parameter 종류가 조금 많습니다.
+대신 채워야 하는 parameter 종류가 조금 많습니다.  
+그래도 대부분 optional이기 때문에 필요한것만 채워서 생성하는것도 가능합니다.  
+
+어떤 것이 필수(required)이고 어떤 것이 선택사항(optional)인지 아래 parameter에서 확인해보세요.
 
 Parameters:  
-- **project_id** (int or string) – (required). issue가 추가 될 project의 id 나 식별자 .  
-- **subject** (string) – (required). Issue 제목.  
+- **project_id** (int or string) – (**required**). issue가 추가 될 project의 id 나 식별자 .  
+- **subject** (string) – (**required**). Issue 제목.  
 - **tracker_id** (int) – (optional). Issue tracker id.  
 - **description** (string) – (optional). Issue 설명.  
 - **status_id** (int) – (optional). Issue status id.  
@@ -258,21 +304,58 @@ Parameters:
 - **start_date** (string or date object) – (optional). Issue start date.  
 - **due_date** (string or date object) – (optional). Issue end date.  
 - **estimated_hours** (int) – (optional). Issue 추정시간.  
-- **done_ratio** (int) – (optional). Issue 완료 비율.  
+- **done_ratio** (int) – (optional). Issue 완료 비율.    
 - **custom_fields** (list) – (optional). Custom fields as [{‘id’: 1, ‘value’: ‘foo’}].  
 - **uploads** (list) – (optional). Uploads as [{'': ''}, ...], accepted keys are:  
-   - path (required). Absolute file path or file-like object that should be uploaded.
+   - path (**required**). Absolute file path or file-like object that should be uploaded.
    - filename (optional). Name of the file after upload.
    - description (optional). Description of the file.
    - content_type (optional). Content type of the file.
 
+확인하시기 편하도록 실제 issues 생성화면을 첨부하오니 필요하신 내용을 확인하고 채우시기 바랍니다. 
 
+![make_issue](./image/make_issue.png)
 
+- 유형 = tracker_id  
+- 제목 = subject
+- 설명 = description
+- 상태 = status_id
+- 우선순위 = priority_id
+- 담당자 = assigned_to_id
+- 상위일감 = parent_issue_id
+- 시작시간 = start_date
+- 완료기한 = due_date
+- 추정시간 = estimated_hours
+- 진척도 = done_ratio
+- 파일 = uploads
 
-## Redmine 특정 Project Issue 불러오기
+```python
+new_issue = redmine.issue.create(
+    project_id = list(redmine.project.all())[0]['id'],
+    subject="my_issue", # 제목
+    tracker_id=2, #유형 {결함 : 1, 새기능 : 2, 지원 : 3}
+    description="description of issue",
+    status_id = 0, # 초기생성에서는 신규 밖에 선택이 안됨
+    priority_id =2, # 우선순위 {낮음 : 1, 보통 : 2, 높음 : 3, 긴급 : 4}
+    category_id=0,  # 뭔지 모르겠음
+    start_date = "2020-05-10",
+    due_date = "2020-05-12",
+    done_ratio = 50
+)
+```
 
 
 ## Redmine 특정 Project Issue 편집하기
+
+특정 project의 issue를 불러와서 편집해보겠습니다.
+
+```python
+my_issue = list(prj.issues)[0]
+my_issue['due_date']="2020-05-11"
+my_issue.save()
+```
+
+![issue_contents_list](./image/issue_contents_list.png)
 
 
 ## Redmine 특정 Project Gantt-chart 불러오기
