@@ -11,7 +11,7 @@
 - Redmine 특정 Project Issue 불러오기
 - Redmine 특정 Project Issue 생성하기
 - Redmine 특정 Project Issue 편집하기
-- Redmine 특정 Project Gantt-chart 불러오기
+- Redmine 특정 Project Gantt-chart 다운로드하기
 
 
 
@@ -358,4 +358,17 @@ my_issue.save()
 ![issue_contents_list](./image/issue_contents_list.png)
 
 
-## Redmine 특정 Project Gantt-chart 불러오기
+## Redmine 특정 Project Gantt-chart 다운로드하기
+
+Gantt-chart를 다운로드 하는 방법은 아래와 같습니다.
+아래와 같은 방식으로 받아야 private project도 다운받을 수 있습니다.
+
+```python
+filepath = redmine.download(
+    url = list(redmine.project.all())[0]['url']+"/issues/gantt.pdf",
+    savepath='./',
+    filename="gantt.pdf"
+    )
+```
+
+---
