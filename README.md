@@ -2,7 +2,7 @@
 ![py_redmine](./image/py_redmine.png)
 ## 목차
 
-- [Library 설치(python-redmine)](#Library-설치(python-redmine))
+- [Library 설치(python-redmine)](#Library-설치python-redmine)
 - [Search, Resource, Introspection](#Search,-Resource,-Introspection)
 - Python과 Redmine 연결
 - Redmine Project 불러오기
