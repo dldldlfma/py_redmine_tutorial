@@ -3,15 +3,14 @@
 ## 목차
 
 - [Library 설치(python-redmine)](#Library-설치python-redmine)
-- [Search, Resource, Introspection](#Search,-Resource,-Introspection)
-- Python과 Redmine 연결
-- Redmine Project 불러오기
-- Redmine Project 생성하기
-- Redmine Project 편집하기
-- Redmine 특정 Project Issue 불러오기
-- Redmine 특정 Project Issue 생성하기
-- Redmine 특정 Project Issue 편집하기
-- Redmine 특정 Project Gantt-chart 다운로드하기
+- [Search, Resource, Introspection](#search-resource-introspection)
+- [Redmine Project 불러오기](#redmine-project-불러오기)
+- [Redmine Project 생성하기](#redmine-project-생성하기)
+- [Redmine Project 편집하기](#redmine-project-편집하기)
+- [Redmine 특정 Project Issue 불러오기](#redmine-특정-project-issue-불러오기)
+- [Redmine 특정 Project Issue 생성하기](#redmine-특정-project-issue-생성하기)
+- [Redmine 특정 Project Issue 편집하기](#redmine-특정-project-issue-편집하기)
+- [Redmine 특정 Project Gantt-chart 다운로드하기](#redmine-특정-project-gantt-chart-다운로드하기)
 
 
 
